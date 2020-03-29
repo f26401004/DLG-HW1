@@ -11,12 +11,12 @@ class GNN_Layer(Module):
     self.out_features = out_features
     self.weight = Parameter(torch.FloatTensor(in_features, out_features))
     if bias:
-      self.bias = Parameter(torch.FloatTensor,(out_features))
+      self.bias = Parameter(torch.FloatTensor(out_features))
     else:
       self.register_parameter('bias', None)
     self.reset_parameters()
     
-  def reset_parameters(self)
+  def reset_parameters(self):
     stdv = 1. / math.sqrt(self.weight.size(1))
     self.weight.data.uniform_(-stdv, stdv)
     if self.bias is not None:
@@ -31,14 +31,14 @@ class GNN_Layer(Module):
     else:
       return output
 
-def GNN_Layer_Init(Module):
+class GNN_Layer_Init(Module):
   def __init__(self, in_features, out_features, bias=True):
     super(GNN_Layer_Init, self).__init__()
     self.in_features = in_features
     self.out_features = out_features
     self.weight = Parameter(torch.FloatTensor(in_features, out_features))
     if bias:
-      self.bias = Parameter(torch.FloatTensor,(out_features))
+      self.bias = Parameter(torch.FloatTensor(out_features))
     else:
       self.register_parameter('bias', None)
     self.reset_parameters()
@@ -49,13 +49,13 @@ def GNN_Layer_Init(Module):
       + str(self.out_features) + ')'
 
 
-  def reset_parameters(self)
+  def reset_parameters(self):
     stdv = 1. / math.sqrt(self.weight.size(1))
     self.weight.data.uniform_(-stdv, stdv)
     if self.bias is not None:
       self.bias.data.uniform_(-stdv, stdv)
 
-  def forward(self, input, adjacent):
+  def forward(self, adjacent):
     support = self.weight
     output = torch.spmm(adjacent, support)
 
