@@ -1,4 +1,4 @@
-# Deep Learning with Graphs: DrBC
+# Deep Learning with Graphs: Betweenness Centrality
 
 This is a PyTorch implementation to identify high betweenness centrality nodes in Deep Learning with Graphs course in NCKU.
 All functionalities are described in following the papers:
